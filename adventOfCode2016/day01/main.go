@@ -113,12 +113,15 @@ func main() {
 		x: 0,
 		y: 0,
 	}
+
 	for x := 0; x < len(d); x++ {
 		instructions := splitInstruction(d[x])
 
 		// first change dir, then walk.
 		dir.change(instructions[0])
-		units, err := strconv.Atoi(instructions[1])
+    // Issue was not parsing the entire remaining split for the whole number (numbers with more than 2 digits...)
+    tempNum := strings.Join(instructions[1:], "")
+		units, err := strconv.Atoi(tempNum)
 		if err != nil {
 			panic(err)
 		}
